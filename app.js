@@ -6,9 +6,11 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
+io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    console.log(`message: ${msg}`);
+  });
+  socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
